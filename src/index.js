@@ -94,7 +94,7 @@ export default class ImageGallery {
   static get toolbox() {
     return {
       icon: ToolboxIcon,
-      title: 'Gallery',
+      title: 'Галлерея',
     };
   }
 
@@ -139,7 +139,8 @@ export default class ImageGallery {
       api,
       config: this.config,
       onSelectFile: () => {
-        let maxElementCount = (this.config.maxElementCount) ? this.config.maxElementCount - this._data.files.length : null;
+        const maxElementCount = (this.config.maxElementCount) ? this.config.maxElementCount - this._data.files.length : null;
+
         this.uploader.uploadSelectedFiles(maxElementCount, {
           onPreview: (file) => {
             return this.ui.getPreloader(file);
@@ -188,7 +189,15 @@ export default class ImageGallery {
     return this.ui.render(this.data);
   }
 
-  rendered() {
+  rendered/**
+           *
+           *//**
+              *
+              *//**
+                 *
+                 *//**
+                    *
+                    */() {
     this.checkMaxElemCount();
 
     return this.ui.onRendered();
@@ -308,7 +317,8 @@ export default class ImageGallery {
     this._data.caption = data.caption || '';
     this.ui.fillCaption(this._data.caption);
 
-    let style = data.style || '';
+    const style = data.style || '';
+
     this.styleToggled(style);
   }
 
@@ -327,8 +337,8 @@ export default class ImageGallery {
    * File uploading callback
    *
    * @private
-   *
    * @param {UploadResponseFormat} response - uploading server response
+   * @param previewElem
    * @returns {void}
    */
   onUpload(response, previewElem) {
@@ -336,7 +346,7 @@ export default class ImageGallery {
     if (response.success && response.file) {
       this.appendImage(response.file);
     } else {
-      this.uploadingFailed('incorrect response: ' + JSON.stringify(response));
+      this.uploadingFailed(response);
     }
   }
 
@@ -345,15 +355,14 @@ export default class ImageGallery {
    *
    * @private
    * @param {string} errorText - uploading error text
+   * @param previewElem
    * @returns {void}
    */
   uploadingFailed(errorText, previewElem) {
-    this.ui.removePreloader(previewElem);
-
-    console.log('Image Tool: uploading failed because of', errorText);
+    previewElem && this.ui.removePreloader(previewElem);
 
     this.api.notifier.show({
-      message: this.api.i18n.t('Couldn’t upload image. Please try another.'),
+      message: errorText || this.api.i18n.t('Couldn’t upload image. Please try another.'),
       style: 'error',
     });
   }
@@ -374,7 +383,15 @@ export default class ImageGallery {
     }
   }
 
-  checkMaxElemCount() {
+  checkMaxElemCount/**
+                    *
+                    *//**
+                       *
+                       *//**
+                          *
+                          *//**
+                             *
+                             */() {
     this.ui.updateLimitCounter(this._data.files.length, this.config.maxElementCount);
 
     if (this.config.maxElementCount && this._data.files.length >= this.config.maxElementCount) {
