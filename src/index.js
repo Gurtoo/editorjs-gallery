@@ -46,7 +46,7 @@
 // eslint-disable-next-line
 import css from './index.pcss';
 import Ui from './ui';
-import Tunes from './tunes';
+// import Tunes from './tunes';
 import ToolboxIcon from './svg/toolbox.svg';
 import Uploader from './uploader';
 
@@ -165,11 +165,11 @@ export default class ImageGallery {
     /**
      * Module for working with tunes
      */
-    this.tunes = new Tunes({
-      api,
-      actions: this.config.actions,
-      onChange: (styleName) => this.styleToggled(styleName),
-    });
+    // this.tunes = new Tunes({
+    //   api,
+    //   actions: this.config.actions,
+    //   onChange: (styleName) => this.styleToggled(styleName),
+    // });
 
     /**
      * Set saved state
@@ -240,9 +240,9 @@ export default class ImageGallery {
    *
    * @returns {Element}
    */
-  renderSettings() {
-    return this.tunes.render(this.data);
-  }
+  // renderSettings() {
+  //   return this.tunes.render(this.data);
+  // }
 
   /**
    * Set new image file
